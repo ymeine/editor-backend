@@ -37,15 +37,15 @@ As all the actual functionalities are implemented in the [`editor library`](./no
 
 In short, a custom RPC protocol is used, over HTTP, using JSON for data serialization.
 
-The modules behind the API exposed by the server are all stored in the [`modes`](/ultimate-poc/resources/app/node_modules/modes) module: once again, please refer to its documentation.
+The modules behind the API exposed by the server are all stored in the [`modes`](node_modules/modes) module: once again, please refer to its documentation.
 
-All of this is implemented by simply using a standard server library, currently directly embedded and developed in the editor library itself. Please refer to [its documentation](/ultimate-poc/resources/app/node_modules/std/server/README.md) for any information on how to use it.
+All of this is implemented by simply using a standard server library, currently directly embedded and developed in the editor library itself. Please refer to [its documentation](node_modules/std/server/README.md) for any information on how to use it.
 
 ## Routes
 
 __The _Route_ is a common concept in HTTP servers: they define actions to be performed by the server based on some criteria concerning the requests it receives (like the URL path, the HTTP method, ...)__
 
-For more information about the implementation of the routes in the standard library, please refer to the [`server`](/ultimate-poc/resources/app/node_modules/std/server) module.
+For more information about the implementation of the routes in the standard library, please refer to the [`server`](node_modules/std/server) module.
 
 The server instance accepts a list of routes as inputs: these are defined in the [_routes_](./routes.js) module file, which exports an array collection of route specifications.
 
@@ -53,7 +53,7 @@ The server instance accepts a list of routes as inputs: these are defined in the
 
 __General options for the server.__
 
-Please refer to the [`server`](/ultimate-poc/resources/app/node_modules/std/server) module for more information on available options.
+Please refer to the [`server`](node_modules/std/server) module for more information on available options.
 
 Options used here are defined in the [_options_](./options.js) module file (for convenience), which directly an object that follows the input format that the server library expects.
 
@@ -80,11 +80,11 @@ As previously stated, requests are handled by routes, and here we'll consider on
 
 ### Ping
 
-__Standard service provided by the server library__: [documentation](/ultimate-poc/resources/app/node_modules/std/server#ping)
+__Standard service provided by the server library__: [documentation](node_modules/std/server#ping)
 
 ### Shutdown
 
-__Standard service provided by the server library__: [documentation](/ultimate-poc/resources/app/node_modules/std/server#shutdown)
+__Standard service provided by the server library__: [documentation](node_modules/std/server#shutdown)
 
 ### GUID identification
 
@@ -102,15 +102,15 @@ This is generally used to identify the server as being an instance of this backe
 
 ### RPC
 
-__Standard service provided by the server library__: [documentation](/ultimate-poc/resources/app/node_modules/std/server#rpc)
+__Standard service provided by the server library__: [documentation](node_modules/std/server#rpc)
 
-For now there is only one module registered for exposition through RPC: the editor module. Please refer to the [respective documentation](/ultimate-poc/resources/app/node_modules/modes) for more information.
+For now there is only one module registered for exposition through RPC: the editor module. Please refer to the [respective documentation](node_modules/modes) for more information.
 
 ### Info
 
 ___DISCLAIMER: not implemented by the library yet.___
 
-__Standard service provided by the server library__: [documentation](/ultimate-poc/resources/app/node_modules/std/server#info)
+__Standard service provided by the server library__: [documentation](node_modules/std/server#info)
 
 # Contribute
 

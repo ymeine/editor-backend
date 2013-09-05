@@ -52,9 +52,9 @@ See [here](#3rd-party-libraries) for downloads.
 
 ## Try
 
-Just go to the root of the backend project and follow the [instructions to launch the backend](/ultimate-poc/resources#try).
+Just go to the root of the backend project and follow the [instructions to launch the backend](/#try).
 
-The application is served on two [routes](/ultimate-poc/resources/app/routes.js):
+The application is served on two [routes](/app/routes.js):
 
 * `/` (no path)
 * `/app`
