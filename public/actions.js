@@ -164,6 +164,7 @@ var poc = {
 		this.highlight();
 		this.fold();
 		this.outline();
+		// this.error();
 	},
 
 	clear: function() {
