@@ -1,0 +1,20 @@
+{
+	"name": "editor-webapp",
+	"version": "0.0.1",
+	"private": true,
+
+	"main": "index.html",
+
+	"dependencies": {
+		"requirejs": "*",
+		"jquery": "*",
+		"jqtree": "*",
+		"bootstrap": "*",
+		"hogan": "*",
+		"ace": "*",
+		"codemirror": "*",
+		"highlightjs": "*",
+		"jit": "*",
+		"cytoscape": "*"
+	}
+}

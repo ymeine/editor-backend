@@ -1,4 +1,8 @@
-define([], function() {
+define([
+	'ace/ace'
+], function(
+	ace
+) {
 
 function createAceEditor(id, height) {
 	var editorElmt = $("#" + id);

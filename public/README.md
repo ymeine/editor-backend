@@ -27,8 +27,9 @@ I always use the latests releases expect specified otherwise.
 * [Require.js](http://requirejs.org/): modules management
 * [JQuery](http://jquery.com/): basic operations
 * [Bootstrap 3](http://getbootstrap.com/): GUI
-* [Hogan.js](http://twitter.github.io/hogan.js/): GUI
+* [Hogan.js](http://twitter.github.io/hogan.js/): templating (GUI)
 * [Ace](http://ace.c9.io/#nav=about): code edition
+* [CodeMirror](http://codemirror.net/): code edition
 * [Highlight.js](http://softwaremaniacs.org/soft/highlight/en/): static code highlighting
 * [JavaScript InfoVis Toolkit](http://philogb.github.io/jit/): graph display
 * [Cytoscape.js](http://cytoscape.github.io/cytoscape.js/): graph display
@@ -39,16 +40,13 @@ I always use the latests releases expect specified otherwise.
 
 Considering the files have already been cloned from the repository, the only thing you need to do is to install the third party libraries.
 
-To have a list of these libraries, have a look at [this documentation](#3rd-party-libraries), but also at the [`index.html`](./index.html), at the bottom of the file where scripts are included, but also at the top, for third-party stylesheets.
+For that, we are currently using [Bower](http://bower.io/), __please install it.__
 
-You can put these libraries in two folders, which have been configured to be served statically by the server, in the following precedence:
+Once installed, run this command in this current folder:
 
-1. lib
-1. bower_components
-
-Just take care of following the same path conventions (look at [`index.html`](./index.html) code), and to use the [proper versions](#3rd-party-libraries).
-
-See [here](#3rd-party-libraries) for downloads.
+```bash
+bower install
+```
 
 ## Try
 
@@ -58,6 +56,8 @@ The application is served on two [routes](/app/routes.js):
 
 * `/` (no path)
 * `/app`
+
+Open a browser and connect to localhost, on the port specified in the backend options (default to 3000): http://localhost:3000
 
 ## FIXME
 
