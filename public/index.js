@@ -17,10 +17,10 @@ TabsGroup = TabsGroup.TabsGroup;
 
 // Top of the page -------------------------------------------------------------
 
-GUI.jumbotron({
-	header: 'Ultimate editor!',
-	content: 'Try the features of the ultimate editor, which funnily doesn\'t have a frontend...'
-});
+// GUI.jumbotron({
+// 	header: 'Ultimate editor!',
+// 	content: 'Try the features of the ultimate editor, which funnily doesn\'t have a frontend...'
+// });
 GUI.pageHeader({text: 'Graph visualization', small: 'Parse and play'});
 
 // Actions ---------------------------------------------------------------------
