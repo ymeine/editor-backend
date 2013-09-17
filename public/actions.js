@@ -1,13 +1,14 @@
 define([
 	'backend',
 	'gui',
-	'graphs'
+	'graphs',
+	'ace/range'
 ], function(
 	Backend,
 	GUI,
-	Graphs
+	Graphs,
+	range
 ) {
-
 
 
 
@@ -164,7 +165,7 @@ var poc = {
 		this.highlight();
 		this.fold();
 		this.outline();
-		// this.error();
+		// this.validate();
 	},
 
 	clear: function() {
@@ -248,6 +249,50 @@ var poc = {
 		$('#outline-data-content').html(JSONToHTML(data));
 	},
 
+	markers: [],
+
+	validate: function(){
+		var data = Backend.service(poc.doc, "validate");
+		poc.introspection.errors = data;
+
+		var session = this.editor.getSession();
+
+		// Annotations ---------------------------------------------------------
+
+		var annotations = data.errors.map(function(error) {
+			return {
+				row: error.start.line - 1,
+				column: error.start.column - 1,
+				text: error.errors.join(', '),
+				type: 'error'
+			}
+		});
+		poc.introspection.annotations = annotations;
+		session.setAnnotations(annotations);
+
+		// Markers -------------------------------------------------------------
+
+		// Remove old markers, if any
+
+		for (var i = 0, length = this.markers.length; i < length; i++) {
+			session.removeMarker(this.markers[i]);
+		}
+
+		this.markers = [];
+
+		// Add new markers
+
+		var errors = data.errors;
+		for (var i = 0, length = errors.length; i < length; i++) {
+			var error = errors[i];
+
+			var r = new range.Range(error.start.line - 1, error.start.column - 1, error.end.line - 1, error.end.column - 1);
+			var marker = session.addMarker(r, 'token-error', 'line', true);
+
+			this.markers.push(marker);
+		}
+	},
+
 // Live preview ----------------------------------------------------------------
 
 	preview: function(evt) {
@@ -264,7 +309,7 @@ var poc = {
 		var end;
 		var text;
 
-		// ERROR! Position to index will give results for update dtext already!!!
+		// ERROR! Position to index will give results for updated text already!!!
 		// When removing text it's annoying, and it doesn't work for 'del'
 
 		start = editorDocument.positionToIndex(range.start);
@@ -291,13 +336,10 @@ var poc = {
 			poc.pending = true;
 		} else {
 			if (poc.pending) {
-				//console.log("Now it's ok...");
 				poc.pendingAlert.remove();
 			}
 			poc.pending = false;
 		}
-
-		// this.update();
 
 		// Highlight -----------------------------------------------------------
 
@@ -308,6 +350,10 @@ var poc = {
 		var html = Backend.service(poc.doc, "html");
 
 		$('#preview-content').html(html);
+
+		// Highlight -----------------------------------------------------------
+
+		this.validate();
 	}
 
 };
