@@ -5,7 +5,7 @@ define(function() {
 var templates = {
 	element: '<{{tag}}{{#id}} id="{{id}}{{/id}}">{{text}}</{{tag}}>',
 
-	message: '<div class="alert alert-{{type}} fade in" id="{{id}}-{{type}}"><button type="button" class="close" data-dismiss="alert">&times; close</button><span>{{text}}</span></div>',
+	message: '<div class="alert alert-{{type}} fade in" id="{{id}}-{{type}}">{{#close}}<button type="button" class="close" data-dismiss="alert">&times; close</button>{{/close}}<span>{{text}}</span></div>',
 
 	jumbotron: '<div class="jumbotron"><h1>{{header}}</h1><p>{{&content}}</p></div>',
 

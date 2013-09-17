@@ -4,10 +4,27 @@ define([
 	Templates
 ) {
 
+/**
+ * type: 'danger', 'success', 'info'
+ * id
+ * text
+ * close: true to display a close button
+ */
 function alert(input) {
-	var element = $(Templates.render('message', input));
-	$('#messages-section').append(element);
-	return element;
+	if (input.text != null) {
+		if (input.type === 'error') input.type = 'danger';
+		if (input.type === 'fatal') input.type = 'danger';
+
+		if (input.type == null) input.type = 'info';
+
+		if (input.close == null) input.close = true;
+
+		var element = $(Templates.render('message', input));
+		$('#messages-section').append(element);
+		return element;
+	}
+
+	throw Error('No text given for alert');
 }
 
 function addStyle(css, id) {
