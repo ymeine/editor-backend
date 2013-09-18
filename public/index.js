@@ -26,11 +26,7 @@ GUI.pageHeader({text: 'Graph visualization', small: 'Parse and play'});
 // Actions ---------------------------------------------------------------------
 
 GUI.addAction({label: 'Init', type: 'danger', onclick: 'poc.init()', icon: 'home'});
-// GUI.addAction({label: 'Parse', type: 'primary', loading: 'Parsing...', onclick: 'poc.parse()'});
-// GUI.addAction({label: 'Highlight', type: 'primary', loading: 'Highlighting...', onclick: 'poc.highlight()'});
-// GUI.addAction({label: 'Fold', type: 'primary', loading: 'Folding...', onclick: 'poc.fold()'});
-// GUI.addAction({label: 'Update all', type: 'primary', loading: 'Updating...', onclick: 'poc.update()', icon: 'refresh'});
-GUI.addAction({label: 'Clear', type: 'danger', onclick: 'poc.clear()', icon: 'trash'});
+GUI.addAction({label: 'Clear', type: 'danger', onclick: 'poc.clear()', icon: 'trash', disabled: false});
 GUI.addAction({label: 'Help', type: 'info', href: 'help', icon: 'question-sign'});
 GUI.addAction({label: 'Ping', onclick: 'poc.ping()'});
 GUI.addAction({label: 'Identify', onclick: 'poc.guid()'});
@@ -40,8 +36,8 @@ GUI.addAction({label: 'Shutdown', type: 'danger', onclick: 'poc.shutdown()', ico
 
 var tabs = new TabsGroup({id: 'tabs-section', type: 'pill'});
 
-tabs.add({id: 'editor-ace', label: 'Editor (Ace)', active: true});
-tabs.add({id: 'editor-cm', label: 'Editor (CodeMirror)', disabled: true});
+tabs.add({id: 'editor-ace', label: 'Editor (Ace)', onclick: 'poc.onAceTab()', active: false, disabled: false});
+tabs.add({id: 'editor-cm', label: 'Editor (CodeMirror)', onclick: 'poc.onCMTab()', active: true, disabled: false});
 tabs.add({id: 'highlighted', label: 'Highlighted'});
 tabs.add({id: 'outline', label: 'Outline'});
 tabs.add({id: 'ast', label: 'AST'});
@@ -69,10 +65,14 @@ GUI.setNodePath({
 
 var editorAce = poc.editor = Editors.createAceEditor('editor-ace', $('#' + tabs.id).css('height'));
 
-editorAce.on('blur', poc.update.bind(poc));
-editorAce.on('change', poc.preview.bind(poc));
+editorAce.on('blur', poc.onBlurAce);
+editorAce.on('change', poc.onChangeAce);
 
 var editorCM = poc.editorCM = Editors.createCMEditor('editor-cm');
+
+editorCM.on('blur', poc.onBlurCM);
+editorCM.on('change', poc.onChangeCM);
+
 
 // Initialization --------------------------------------------------------------
 

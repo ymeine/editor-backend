@@ -156,8 +156,19 @@ var poc = {
 		$('#highlight-stylesheet').html(css);
 	},
 
+	onBlurAce: function(evt) {
+		poc.source = poc.editor.getSession().getDocument().getValue();
+
+		poc.update();
+	},
+
+	onBlurCM: function(evt) {
+		poc.source = poc.editorCM.getDoc().getValue();
+
+		poc.update();
+	},
+
 	update: function() {
-		this.source = this.editor.getSession().getDocument().getValue();
 		Backend.updateAll(poc.doc, this.source);
 
 		this.parse();
@@ -166,8 +177,34 @@ var poc = {
 		this.outline();
 	},
 
+	onAceTab: function() {
+		poc.replaceEditorContentAce();
+		poc.editor.focus();
+	},
+
+	onCMTab: function() {
+		poc.replaceEditorContentCM();
+		poc.editorCM.focus();
+		poc.editorCM.refresh();
+	},
+
+	replaceEditorContentAce: function() {
+		poc.editor.removeEventListener('change', poc.onChangeAce);
+		poc.editor.getSession().getDocument().setValue(poc.source);
+		poc.editor.on('change', poc.onChangeAce);
+	},
+
+	replaceEditorContentCM: function() {
+		poc.editorCM.off('change', poc.onChangeCM);
+		poc.editorCM.getDoc().setValue(poc.source);
+		poc.editorCM.on('change', poc.onChangeCM);
+	},
+
 	clear: function() {
-		this.editor.getSession().getDocument().setValue(initialSource);
+		this.source = initialSource;
+
+		poc.replaceEditorContentAce();
+		poc.replaceEditorContentCM();
 
 		this.update();
 	},
@@ -248,8 +285,7 @@ var poc = {
 	},
 
 // Live preview ----------------------------------------------------------------
-
-	preview: function(evt) {
+	onChangeAce: function(evt) {
 		// Update --------------------------------------------------------------
 
 		var delta = evt.data;
@@ -257,13 +293,13 @@ var poc = {
 		var action = delta.action;
 		var range = delta.range;
 
-		var editorDocument = this.editor.getSession().getDocument();
+		var editorDocument = poc.editor.getSession().getDocument();
 
 		var start;
 		var end;
 		var text;
 
-		// ERROR! Position to index will give results for update dtext already!!!
+		// ERROR! Position to index will give results for updated text already!!!
 		// When removing text it's annoying, and it doesn't work for 'del'
 
 		start = editorDocument.positionToIndex(range.start);
@@ -277,9 +313,41 @@ var poc = {
 		}
 
 		Backend.service(poc.doc, "update", {source: text, start: start, end: end});
+		poc.source = editorDocument.getValue();
 
-		// this.update();
+		poc.preview();
+	},
 
+	// FIXME Update document of the other editor: should be a feature of the backend: on focus on an editor, it should ask what changed since last time it edited the document. That's where the notion of client comes over the notion of session: two clients can edit the same document. So a client session should be created, and passed for requests on documents. This way the backend will be able to create
+
+	onChangeCM: function(instance, changeObj) {
+		var doc = instance.getDoc()
+
+		var currentChange = changeObj;
+		while (currentChange != null) {
+			var text = currentChange.text.join('\n');
+			var removed = currentChange.removed.join('\n');
+
+			var start = doc.indexFromPos(currentChange.from);
+
+			var end = start + removed.length;
+			// Note indexFromPos will work on the new content of the document
+			// This means after removal.
+			// So in case you remove a character at the end of the line, the computed index is cropped since it's trying to hit a non-existing-anymore column on the line
+
+			var update = {source: text, start: start, end: end};
+
+			Backend.service(poc.doc, "update", update);
+
+			currentChange = currentChange.next;
+		}
+
+		poc.source = doc.getValue();
+
+		poc.preview();
+	},
+
+	preview: function() {
 		// Highlight -----------------------------------------------------------
 
 		var ranges = Backend.service(poc.doc, "highlight");

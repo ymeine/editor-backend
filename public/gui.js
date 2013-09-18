@@ -20,6 +20,8 @@ function addAction(input) {
 	input.type == null && (input.type = 'default');
 	input.type = input.type.toLowerCase();
 
+	input.disabled == null && (input.disabled = false);
+
 	var element = $(Templates.render('action', input));
 	$('#sidebar-section').append(element);
 	return element;
