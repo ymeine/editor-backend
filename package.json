@@ -63,6 +63,8 @@
 		"winston": "*",
 
 		"pegjs": "git+https://github.com/dmajda/pegjs",
-		"escape-html": "*"
+		"escape-html": "*",
+		"performance-now": "*",
+		"ariatemplates": "*"
 	}
 }
