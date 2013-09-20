@@ -121,6 +121,40 @@ Also, [build the HTML parser](app/node_modules/modes/html/parser#setup).
 * execute the command: `npm start` from this directory
 * (you can check it works if [this](http://localhost:3000/ping) sends `OK`)
 
+## Test
+
+You can also run the set of tests, and you __MUST DO IT__ when you develop, before requesting any integration of your work.
+
+For that, simply run the npm script:
+
+```bash
+npm test
+```
+
+## Development utilities
+
+To avoid rebuilding the grammars manually anytime you change them, or any other file that needs to be rebuilt, you can use the provided watch script. Run it from the root of the package, like this:
+
+```bash
+npm run-script watch
+```
+
+However, for now it doesn't handle restarting the whole application (the server) when a change is made in its code, because this is a bit heavy and requires some subtle logic to keep it handy.
+
+But you can use the _native_ npm script to restart the application:
+
+```bash
+npm restart
+```
+
+This is possible due to the fact that a `stop` script has been added in addition to the `start` one. So you can also do:
+
+```bash
+npm stop
+```
+
+to shut the server down, instead of using a kill signal.
+
 ## Development
 
 Please refer to the subfolders of the project for details about corresponding modules specific development: every folder containing a documentation like this contains a section talking about contributions you can make to it.
