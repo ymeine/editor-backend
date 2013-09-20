@@ -37,7 +37,8 @@
 
 
 	"scripts": {
-		"start": "node app/index.js"
+		"start": "node app/index.js",
+		"watch": "node watch.js"
 	},
 	"bin": {
 		"editor-svc": "app/index.js"
@@ -52,6 +53,9 @@
 	"engineStrict": false,
 	"engines": {
 		"node": "*"
+	},
+	"devDependencies": {
+		"chokidar": "*"
 	},
 	"dependencies": {
 		"lodash": "*",
