@@ -171,7 +171,6 @@ var poc = {
 	update: function() {
 		Backend.updateAll(poc.doc, this.source);
 
-		this.parse();
 		this.highlight();
 		this.fold();
 		this.outline();
@@ -179,12 +178,12 @@ var poc = {
 
 	onAceTab: function() {
 		poc.replaceEditorContentAce();
-		poc.editor.focus();
+		// poc.editor.focus();
 	},
 
 	onCMTab: function() {
 		poc.replaceEditorContentCM();
-		poc.editorCM.focus();
+		// poc.editorCM.focus();
 		poc.editorCM.refresh();
 	},
 
