@@ -15,4 +15,5 @@ function createWatcher(grammar) {
 }
 
 createWatcher('html');
+createWatcher('at');
 
