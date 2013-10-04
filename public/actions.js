@@ -276,7 +276,25 @@ var poc = {
 			text = delta.lines.join('\n') + '\n';
 		}
 
-		Backend.service(poc.doc, "update", {source: text, start: start, end: end});
+		var updateResult = Backend.service(poc.doc, "update", {source: text, start: start, end: end});
+
+		if (updateResult.state === "pending") {
+			if (!poc.pending) {
+				poc.pendingAlert = GUI.alert({
+					type: 'danger',
+					id: 'pending-parser',
+					text: "Couldn't parse current content",
+					close: false
+				});
+			}
+			poc.pending = true;
+		} else {
+			if (poc.pending) {
+				//console.log("Now it's ok...");
+				poc.pendingAlert.remove();
+			}
+			poc.pending = false;
+		}
 
 		// this.update();
 
