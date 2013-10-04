@@ -1,13 +1,14 @@
 define([
 	'backend',
 	'gui',
-	'graphs'
+	'graphs',
+	'ace/range'
 ], function(
 	Backend,
 	GUI,
-	Graphs
+	Graphs,
+	range
 ) {
-
 
 
 
@@ -164,6 +165,7 @@ var poc = {
 		this.highlight();
 		this.fold();
 		this.outline();
+		// this.validate();
 	},
 
 	clear: function() {
@@ -247,6 +249,26 @@ var poc = {
 		$('#outline-data-content').html(JSONToHTML(data));
 	},
 
+	validate: function(){
+		var data = Backend.service(poc.doc, "validate");
+		poc.introspection.errors = data;
+
+		var session = this.editor.getSession();
+
+		// Annotations ---------------------------------------------------------
+
+		var annotations = data.errors.map(function(error) {
+			return {
+				row: error.start.line - 1,
+				column: error.start.column - 1,
+				text: error.errors.join(', '),
+				type: 'error'
+			}
+		});
+		poc.introspection.annotations = annotations;
+		session.setAnnotations(annotations);
+	},
+
 // Live preview ----------------------------------------------------------------
 
 	preview: function(evt) {
@@ -263,7 +285,7 @@ var poc = {
 		var end;
 		var text;
 
-		// ERROR! Position to index will give results for update dtext already!!!
+		// ERROR! Position to index will give results for updated text already!!!
 		// When removing text it's annoying, and it doesn't work for 'del'
 
 		start = editorDocument.positionToIndex(range.start);
@@ -290,13 +312,10 @@ var poc = {
 			poc.pending = true;
 		} else {
 			if (poc.pending) {
-				//console.log("Now it's ok...");
 				poc.pendingAlert.remove();
 			}
 			poc.pending = false;
 		}
-
-		// this.update();
 
 		// Highlight -----------------------------------------------------------
 
@@ -307,6 +326,10 @@ var poc = {
 		var html = Backend.service(poc.doc, "html");
 
 		$('#preview-content').html(html);
+
+		// Highlight -----------------------------------------------------------
+
+		this.validate();
 	}
 
 };

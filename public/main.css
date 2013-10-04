@@ -3,3 +3,7 @@
 	width: 100%;
 	height: 25em;
 }
+
+.token-error {
+	border-bottom: dashed red 1px;
+}
