@@ -249,6 +249,8 @@ var poc = {
 		$('#outline-data-content').html(JSONToHTML(data));
 	},
 
+	markers: [],
+
 	validate: function(){
 		var data = Backend.service(poc.doc, "validate");
 		poc.introspection.errors = data;
@@ -267,6 +269,28 @@ var poc = {
 		});
 		poc.introspection.annotations = annotations;
 		session.setAnnotations(annotations);
+
+		// Markers -------------------------------------------------------------
+
+		// Remove old markers, if any
+
+		for (var i = 0, length = this.markers.length; i < length; i++) {
+			session.removeMarker(this.markers[i]);
+		}
+
+		this.markers = [];
+
+		// Add new markers
+
+		var errors = data.errors;
+		for (var i = 0, length = errors.length; i < length; i++) {
+			var error = errors[i];
+
+			var r = new range.Range(error.start.line - 1, error.start.column - 1, error.end.line - 1, error.end.column - 1);
+			var marker = session.addMarker(r, 'token-error', 'line', true);
+
+			this.markers.push(marker);
+		}
 	},
 
 // Live preview ----------------------------------------------------------------
