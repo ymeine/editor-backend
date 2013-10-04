@@ -58,7 +58,9 @@ If you want to implement a client using this backend, please read [this tutorial
 
 ## Architecture
 
-You can view an architecture schema by importing the [xml file in the doc](doc/img/root/architecture.xml) into the web application [draw.io](https://www.draw.io/).
+![architecture.png](doc/img/root/architecture.png "Architecture schema")
+
+_(the [source of the schema](doc/img/root/architecture.xml) uses the web application [draw.io](https://www.draw.io/))_
 
 We call the tools used to actually edit source code: [___frontends___](http://en.wikipedia.org/wiki/Backend). They provide the ([G](http://en.wikipedia.org/wiki/GUI))[UI](http://en.wikipedia.org/wiki/User_interface).
 
