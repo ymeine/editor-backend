@@ -58,6 +58,8 @@ If you want to implement a client using this backend, please read [this tutorial
 
 ## Architecture
 
+You can view an architecture schema by importing the [xml file in the doc](doc/img/root/architecture.xml) into the web application [draw.io](https://www.draw.io/).
+
 We call the tools used to actually edit source code: [___frontends___](http://en.wikipedia.org/wiki/Backend). They provide the ([G](http://en.wikipedia.org/wiki/GUI))[UI](http://en.wikipedia.org/wiki/User_interface).
 
 We call the application serving source edition features (processing): the [___backend___](http://en.wikipedia.org/wiki/Backend).
@@ -110,7 +112,11 @@ Install the node modules, by launching the program with the following properties
 * program arguments (command in this case): `install`
 * current working directory (context): the [folder](./) containing [`package.json`](./package.json)
 
-In more simple words: launch from this directory the command `npm install`.
+In more simple words: launch from this directory the command:
+
+```bash
+npm install
+```
 
 Also, [build the HTML parser](app/node_modules/modes/html/parser#setup).
 
@@ -146,25 +152,6 @@ What can be done among others:
 ### Application code
 
 Please refer to the content of the [`app`](./app) folder.
-
-### Performances of process interactions
-
-__Reduce the overhead introduced by HTTP, JSON serialization and also RPC.__
-
-Maybe the use of JSON-RPC through HTTP can be too heavy for very frequent and simple operations done while editing. I'm mainly thinking about the frequent update of the models (source, AST (graph) and so on) concerning content, positions, etc., while the user enters text.
-
-Think about using a custom protocol built on top of lower-level ones (TCP for instance).
-
-The following aspects can be improved:
-
-* connection setup: keeping connected state (contrary to basic HTTP)
-* protocol overhead: limit amount of data used only for the information transmission. HTTP is pure text and thus easy to read, debug, but it can be too much. Prefer binary, and a minimum amount of required data.
-* serialization: limit verbosity, prefer binary over text (JSON is already better than XML), ...
-* _bonus_ - two ways sockets: rather than a client-server model, simply make the two entities communicate both ways
-
-There are also other standard solutions like [CORBA](http://en.wikipedia.org/wiki/Common_Object_Request_Broker_Architecture) (but I'm not sure there is an available mapping for JavaScript in this case).
-
-I ([ymeine](https://github.com/ymeine)) found recently (05 Jul 2013) an [article](http://dailyjs.com/2013/07/04/hbase/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+dailyjs+%28DailyJS%29) talking about [Thrift](https://thrift.apache.org/). The description at least corresponds exactly to what we want to do: provide services to clients whatever the system they use, and automatically deal with remote procedure calls and so on.
 
 ### Documentation
 
