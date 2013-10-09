@@ -16,4 +16,5 @@ function createWatcher(grammar) {
 
 createWatcher('html');
 createWatcher('at');
+createWatcher('at-html');
 

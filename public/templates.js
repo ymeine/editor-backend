@@ -17,7 +17,7 @@ var templates = {
 
 	dialog: '<div id="{{id}}" class="modal fade"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h4 class="modal-title">{{title}}</h4><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button></div><div class="modal-body"></div><div class="modal-footer"><button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">{{closeLabel}}</button></div></div></div></div>',
 
-	tab: '<li {{#active}}class="active"{{/active}} {{#disabled}}class="disabled"{{/disabled}}><a href="#tab-{{id}}" {{^disabled}}data-toggle="{{type}}"{{/disabled}}>{{label}}</a></li>',
+	tab: '<li {{#active}}class="active"{{/active}} {{#onclick}}onclick="{{onclick}}"{{/onclick}} {{#disabled}}class="disabled"{{/disabled}}><a href="#tab-{{id}}" {{^disabled}}data-toggle="{{type}}"{{/disabled}}>{{label}}</a></li>',
 
 	'tab-content': '<div id="tab-{{id}}" class="tab-pane fade {{#active}}active in{{/active}}"></div>'
 }

@@ -43,13 +43,14 @@ var tabs = new TabsGroup({id: 'tabs-section', type: 'pill'});
 tabs.add({id: 'editor-ace', label: 'Editor (Ace)', active: true});
 tabs.add({id: 'editor-cm', label: 'Editor (CodeMirror)', disabled: true});
 tabs.add({id: 'highlighted', label: 'Highlighted'});
-tabs.add({id: 'outline', label: 'Outline'});
+tabs.add({id: 'outline', label: 'Outline', onclick: 'poc.outline()'});
 tabs.add({id: 'ast', label: 'AST'});
 tabs.add({id: 'graph', label: 'Graph'});
 tabs.add({id: 'highlighting-data', label: 'Highlighting (data)'});
 tabs.add({id: 'folding-data', label: 'Folding (data)'});
 tabs.add({id: 'ast-data', label: 'AST (data)'});
 tabs.add({id: 'outline-data', label: 'Outline (data)'});
+
 
 // Dialogs ---------------------------------------------------------------------
 
@@ -69,8 +70,8 @@ GUI.setNodePath({
 
 var editorAce = poc.editor = Editors.createAceEditor('editor-ace', $('#' + tabs.id).css('height'));
 
-editorAce.on('blur', poc.update.bind(poc));
-editorAce.on('change', poc.preview.bind(poc));
+poc.updateEvery(2000);
+//editorAce.on('change', poc.preview.bind(poc));
 
 var editorCM = poc.editorCM = Editors.createCMEditor('editor-cm');
 

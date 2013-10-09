@@ -67,7 +67,7 @@ function JSONToHTML(json) {
 
 
 
-var initialSource = '<html></html>';
+var initialSource = '{var a = 1/}';
 
 serverAccessErrorAlert = {
 	type: 'danger',
@@ -75,7 +75,7 @@ serverAccessErrorAlert = {
 	text: 'Oops! Server is not responding...'
 }
 
-
+var hasChanged = false;
 
 var poc = {
 
@@ -142,7 +142,7 @@ var poc = {
 	source: initialSource,
 
 	init: function() {
-		poc.doc = Backend.init('html');
+		poc.doc = Backend.init('athtml');
 
 		GUI.alert({
 			type: 'info',
@@ -156,14 +156,30 @@ var poc = {
 		$('#highlight-stylesheet').html(css);
 	},
 
+	updateEvery: function(interval) {
+		if (interval) {
+			this.editor.on('change', function () {
+				hasChanged = true;
+			});
+			window.setInterval((function() {
+				if (hasChanged) {
+					this.update();
+					hasChanged = false;
+				}
+			}).bind(this),interval);
+		}
+	},
+
 	update: function() {
 		this.source = this.editor.getSession().getDocument().getValue();
 		Backend.updateAll(poc.doc, this.source);
 
-		this.parse();
+		//this.parse();
 		this.highlight();
-		this.fold();
-		this.outline();
+		// this.fold();
+		//this.outline();
+		this.validate();
+		this.refreshPreview();
 	},
 
 	clear: function() {
@@ -223,10 +239,11 @@ var poc = {
 	},
 
 	highlight: function() {
-		var ranges = Backend.service(poc.doc, "highlight");
+		var htmlInfo = Backend.service(poc.doc, "html");
+		var ranges = htmlInfo.ranges, html = htmlInfo.html;
 		poc.introspection.highlight = ranges;
+		poc.introspection.highlightedHtml = html;
 
-		var html = Backend.service(poc.doc, "html");
 
 		$('#highlight-content').html(html);
 		$('#highlighting-data-content').html(JSONToHTML(ranges));
@@ -242,12 +259,42 @@ var poc = {
 	outline: function() {
 		var data = Backend.service(poc.doc, "outline", {type: "full"});
 		poc.introspection.outline = data;
+		poc.introspection.simpleOutline = Backend.service(poc.doc, "outline", {type: "toObject"});
 
 		createJqTree('outline-content', data.tree);
 		$('#outline-data-content').html(JSONToHTML(data));
 	},
 
+	validate: function() {
+
+		var response = Backend.service(poc.doc, "validate"), msg, err, items;
+		var annotations = [];
+
+		var types = ['error', 'warning'], keys = ['errors', 'warnings'];
+		for (var j = 0; j < types.length; j++) {
+			items = response[keys[j]];
+			for (var i = 0, len = items.length; i < len; i++) {
+				err = items[i];
+				msg = '- ' + err.messages.join('\n- ');
+				annotations.push({
+					row: err.location.start.line - 1,
+					column: err.location.start.column - 1,
+					type: types[j],
+					raw: msg,
+					text: msg
+				});
+			}
+		}
+		poc.introspection.validation = response;
+		this.editor.getSession().setAnnotations(annotations);
+	},
+
 // Live preview ----------------------------------------------------------------
+
+
+	refreshPreview: function() {
+		$('#preview-content').html(poc.introspection.highlightedHtml);
+	},
 
 	preview: function(evt) {
 		// Update --------------------------------------------------------------
@@ -306,7 +353,7 @@ var poc = {
 
 		var html = Backend.service(poc.doc, "html");
 
-		$('#preview-content').html(html);
+		$('#preview-content').html(html.html);
 	}
 
 };
