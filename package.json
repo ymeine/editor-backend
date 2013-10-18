@@ -45,7 +45,7 @@
 		"test": "mocha"
 	},
 	"bin": {
-		"editor-svc": "bin/svc"
+		"editor-backend": "bin/svc"
 	},
 
 
