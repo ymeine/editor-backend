@@ -42,7 +42,9 @@
 		"stop": "node scripts/shutdown",
 
 		"watch": "node scripts/watch",
-		"test": "mocha"
+		"test": "mocha",
+
+		"profile": "node --prof app/index.js"
 	},
 	"bin": {
 		"editor-backend": "bin/svc",
