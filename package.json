@@ -61,7 +61,8 @@
 	},
 	"devDependencies": {
 		"chokidar": "*",
-		"mocha": "*"
+		"mocha": "*",
+		"benchmark": "*"
 	},
 	"dependencies": {
 		"lodash": "*",

@@ -8,6 +8,7 @@ var grammarBuilder = require('grammar-builder');
 
 function exec() {
 	grammarBuilder.build('html');
+	grammarBuilder.build('html', 'fast-parser');
 	grammarBuilder.build('at');
 	grammarBuilder.build('at-html');
 }
