@@ -71,7 +71,7 @@ function init(mode, source) {
 
 function service(doc, svc, arg) {
 	var argument = {
-		guid: doc.guid,
+		doc: doc,
 		svc: svc,
 		arg: arg
 	};
@@ -83,8 +83,8 @@ function service(doc, svc, arg) {
 	return editor("exec", argument);
 }
 
-function updateAll(guid, source) {
-	return service(guid, "update", {replace: true, source: source});
+function updateAll(doc, source) {
+	return service(doc, "update", {replace: true, source: source});
 }
 
 return {
