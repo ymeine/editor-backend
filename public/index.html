@@ -120,6 +120,36 @@
 	<script src="jit/Jit/jit.js"></script>
 	<script src="cytoscape/cytoscape.js"></script>
 
+	<script src="noder/noder.js">
+	{
+		main: "node_modules/modes/html/fast-parser/index.js",
+		resolver: {
+			"default": {
+				"pegjs-parser": "node_modules/modes/node_modules/pegjs-parser",
+				"oop": "node_modules/oop/src/node_modules",
+				"node_modules": {
+					"modes": {
+						"node_modules": {
+							"pegjs-parser": {}
+						}
+					},
+					"oop": {
+						"src": {
+							"node_modules": {
+								"oop": {},
+								"dop": {}
+							}
+						}
+					}
+				}
+			}
+		},
+		packaging: {
+			baseUrl: "/"
+		}
+	}
+	</script>
+
 	<script type="text/javascript">
 		// Ace uses requirejs too, so to avoid CONFLICTS it has to be configured properly, and to be loaded through require
 		require.config({

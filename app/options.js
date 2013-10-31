@@ -13,7 +13,9 @@ module.exports = {
 		// Remember precedence is important! For resolution in case of conflicting names: first found used.
 		relative: [
 			'public/lib',
-			'public/bower_components'
+			'public/bower_components',
+			'app',
+			'.'
 		]
 	}
 };

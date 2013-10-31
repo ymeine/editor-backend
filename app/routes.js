@@ -32,7 +32,7 @@ module.exports = [
 	// TODO Be able to serve automatically 'index.html' files when hitting a static location
 
 	{
-		url: '/app',
+		url: '/webapp',
 		handler: serveApp
 	},
 
