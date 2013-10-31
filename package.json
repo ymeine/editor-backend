@@ -38,6 +38,7 @@
 
 	"scripts": {
 		"build": "node scripts/build",
+		"bundle": "node scripts/bundle",
 		"start": "node app/index",
 		"stop": "node scripts/shutdown",
 
@@ -64,7 +65,8 @@
 	"devDependencies": {
 		"chokidar": "*",
 		"mocha": "*",
-		"benchmark": "*"
+		"benchmark": "*",
+		"browserify": "*"
 	},
 	"dependencies": {
 		"lodash": "*",
