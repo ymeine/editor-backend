@@ -3,7 +3,6 @@ var atHtmlParser = require("../app/node_modules/modes/at-html/parser/index.js");
 var ParserTester = require("ParserTester").ParserTester;
 var assert = require("assert");
 
-
 /**
  * Runs a list of tests
  * @param {Object} tester
@@ -113,7 +112,7 @@ describe('Parsers', function(){
 	describe('test parse method of AT-HTML parser', function(){
 
 		var basepath = "test/app/node_modules/modes/at-html/parser/index/"
-		var statements = require("../app/node_modules/modes/at-html/parser/statements.js");
+		var validator = require("../app/node_modules/modes/at-html/parser/validator.js");
 
 		/**
 		 * Instance of the tester
@@ -122,7 +121,7 @@ describe('Parsers', function(){
 			parser : atHtmlParser,
 			basepath : basepath,
 			beforeEachTest: function () {
-				statements.restartTracking();
+				validator.restartTracking();
 			}
 		});
 
@@ -432,6 +431,10 @@ describe('Parsers', function(){
 				name: "startEight",
 				rule: "start",
 				duration: 1200
+			}, {
+				name: "startNine",
+				rule: "start",
+				duration: 5
 			}
 		];
 
