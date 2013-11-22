@@ -43,6 +43,8 @@
 
 		"watch": "node scripts/watch",
 		"test": "mocha"
+
+		"benchmark": "node scripts/benchmark"
 	},
 	"bin": {
 		"editor-backend": "bin/svc",
