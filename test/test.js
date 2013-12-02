@@ -435,6 +435,10 @@ describe('Parsers', function(){
 				name: "startNine",
 				rule: "start",
 				duration: 5
+			}, {
+				name: "startEmpty",
+				rule: "start",
+				duration: 5
 			}
 		];
 
