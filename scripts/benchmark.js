@@ -6,8 +6,6 @@ var benchmarker = require('../test/node_modules/benchmarker');
 var benchmarks = require('../test/benchmarks');
 
 
-
 prelude.each(function(benchmark) {
-	console.log(benchmark.inputs);
 	benchmarker(benchmark.name, benchmark.parsers, benchmark.inputs);
 }, benchmarks);

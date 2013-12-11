@@ -1,4 +1,5 @@
 module.exports = [
-	// require('./html'),
+	require('./html')
+	,
 	require('./at-html')
 ]

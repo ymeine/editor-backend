@@ -112,7 +112,7 @@ describe('Parsers', function(){
 	describe('test parse method of AT-HTML parser', function(){
 
 		var basepath = "test/app/node_modules/modes/at-html/parser/index/"
-		var validator = require("../app/node_modules/modes/at-html/parser/validator.js");
+		var validator = require("../app/node_modules/modes/at-html/validator.js");
 
 		/**
 		 * Instance of the tester
