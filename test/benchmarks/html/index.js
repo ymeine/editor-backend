@@ -8,8 +8,9 @@ function readSource(name) {
 }
 
 
+var name = 'HTML';
 
-exports.parsers = [
+var parsers = [
 	{name: 'noindex light', parser: require('../../../app/node_modules/modes/html/parser-noindex-light').parser}
 	,
 	{name: 'noindex', parser: require('../../../app/node_modules/modes/html/parser-noindex').parser}
@@ -24,10 +25,14 @@ exports.parsers = [
 	// {name: 'fake', parser: require('../../../app/node_modules/modes/html/fake-parser').parser}
 ];
 
-exports.inputs = [
+var inputs = [
 	{name: 'small', source: readSource('small')}
 	,
 	{name: 'big', source: bigSource = readSource('big')}
 ];
 
-exports.name = 'HTML';
+
+
+exports.name = name;
+exports.inputs = inputs;
+exports.parsers = parsers;
