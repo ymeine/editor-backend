@@ -1,6 +1,12 @@
+// --------------------------------------------------------------------- Require
+
 var chokidar = require('chokidar');
 
-var grammarBuilder = require('./grammar-builder');
+var grammarBuilder = require('grammar-builder');
+
+
+
+// ---------------------------------------------------------------------- Define
 
 function createWatcher(grammar) {
 	var watcher = chokidar.watch('app/node_modules/modes/' + grammar + '/parser/grammar.pegjs', {
@@ -14,7 +20,23 @@ function createWatcher(grammar) {
 	return watcher;
 }
 
-createWatcher('html');
-createWatcher('at');
-createWatcher('at-html');
+function exec() {
+	createWatcher('html');
+	createWatcher('at');
+	createWatcher('at-html');
+}
 
+
+
+// ---------------------------------------------------------------------- Export
+
+exports.createWatcher = createWatcher;
+exports.exec = exec;
+
+
+
+// ------------------------------------------------------------- Standalone exec
+
+if (require.main === module) {
+	exec();
+}

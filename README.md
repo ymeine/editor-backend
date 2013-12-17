@@ -106,19 +106,17 @@ Tested on Microsoft Windows 7 Enterprise 64-bit SP1.
 
 ## Setup
 
-Install the node modules, by launching the program with the following properties:
-
-* program name: `npm`
-* program arguments (command in this case): `install`
-* current working directory (context): the [folder](./) containing [`package.json`](./package.json)
-
-In more simple words: launch from this directory the command:
+Install the node modules, by launching from [that current directory](./) the command (this might take some time):
 
 ```bash
 npm install
 ```
 
-Also, [build the HTML parser](app/node_modules/modes/html/parser#setup).
+Also, some components inside the package need to be generated, so run from anywhere the command:
+
+```bash
+editor-backend-build
+```
 
 ## Try
 
