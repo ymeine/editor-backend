@@ -37,15 +37,16 @@
 
 
 	"scripts": {
-		"build": "node scripts/build.js",
-		"start": "node app/index.js",
-		"stop": "node scripts/shutdown.js",
+		"build": "node scripts/build",
+		"start": "node app/index",
+		"stop": "node scripts/shutdown",
 
-		"watch": "node scripts/watch.js",
+		"watch": "node scripts/watch",
 		"test": "mocha"
 	},
 	"bin": {
-		"editor-backend": "bin/svc"
+		"editor-backend": "bin/svc",
+		"editor-backend-build": "bin/build"
 	},
 
 
