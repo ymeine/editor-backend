@@ -1,3 +1,10 @@
 #!/usr/bin/env node
 
-require('../scripts/build').exec();
+try {
+	require('../scripts/build').exec();
+	console.log('Built successfully!');
+} catch (exception) {
+	console.error('An error happenned while trying to build the package');
+	console.error('Exception: ');
+	console.error(exception);
+}
