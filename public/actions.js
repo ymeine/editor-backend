@@ -266,19 +266,26 @@ var poc = {
 	},
 
 	validate: function() {
-
 		var response = Backend.service(poc.doc, "validate"), msg, err, items;
+
+		var editSession = this.editor.getSession();
+		var doc = editSession.getDocument();
+
 		var annotations = [];
 
-		var types = ['error', 'warning'], keys = ['errors', 'warnings'];
+		var types = ['error', 'warning'];
+		var keys = ['errors', 'warnings'];
 		for (var j = 0; j < types.length; j++) {
 			items = response[keys[j]];
 			for (var i = 0, len = items.length; i < len; i++) {
 				err = items[i];
 				msg = '- ' + err.messages.join('\n- ');
+
+				position = doc.indexToPosition(err.location.start.index);
+
 				annotations.push({
-					row: err.location.start.line - 1,
-					column: err.location.start.column - 1,
+					row: position.row,
+					column: position.column,
 					type: types[j],
 					raw: msg,
 					text: msg
@@ -286,7 +293,8 @@ var poc = {
 			}
 		}
 		poc.introspection.validation = response;
-		this.editor.getSession().setAnnotations(annotations);
+
+		editSession.setAnnotations(annotations);
 	},
 
 // Live preview ----------------------------------------------------------------
