@@ -176,10 +176,13 @@ describe('Parsers', function(){
 				name: "multiLineCommentNoContent",
 				rule: "multiLineComment",
 				duration: 5
-			},
-			"doubleQuoteString",
-			"singleQuoteString",
-			{
+			}, {
+				name: "doubleQuoteString",
+				rule: "doubleQuoteString"
+			}, {
+				name: "singleQuoteString",
+				rule: "singleQuoteString"
+			}, {
 				name: "doubleQuoteString",
 				rule: "string",
 				duration: 3
@@ -439,8 +442,21 @@ describe('Parsers', function(){
 				name: "startEmpty",
 				rule: "start",
 				duration: 5
+			}, {
+				name: "startTml",
+				rule: "start",
+				duration: 15,
+				extension: "tml"
+			}, {
+				name: "startTmlOne",
+				rule: "start",
+				duration: 15
 			}
 		];
+
+		for (i = 0, len = tests.length; i < len; i++) {
+			tests[i].extension = tests[i].extension || "tpl";
+		}
 
 		runTests(tester, tests);
 
