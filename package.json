@@ -42,7 +42,9 @@
 		"stop": "node scripts/shutdown",
 
 		"watch": "node scripts/watch",
-		"test": "mocha"
+		"test": "mocha",
+
+		"benchmark": "node scripts/benchmark"
 	},
 	"bin": {
 		"editor-backend": "bin/svc",
@@ -62,7 +64,10 @@
 	"devDependencies": {
 		"chokidar": "*",
 		"performance-now": "*",
-		"mocha": "*"
+		"mocha": "*",
+		"benchmark": "*",
+		"colour": "*",
+		"tester": "git+https://github.com/ymeine/tester#version/latest"
 	},
 	"dependencies": {
 		"lodash": "2.x",
