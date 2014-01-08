@@ -57,24 +57,24 @@
 
 	"engineStrict": false,
 	"engines": {
-		"node": "*"
+		"node": ">=0.8"
 	},
 	"devDependencies": {
 		"chokidar": "*",
+		"performance-now": "*",
 		"mocha": "*"
 	},
 	"dependencies": {
-		"lodash": "*",
-		"prelude-ls": "*",
+		"lodash": "2.x",
+		"prelude-ls": "1.x",
 
-		"oop": "git+https://github.com/ymeine/oop",
+		"oop": "git+https://github.com/ymeine/oop#version/latest",
 
-		"http-server": "git+https://github.com/Kykstudio/http-server",
-		"winston": "*",
+		"http-server": "git+https://github.com/Kykstudio/http-server#version/latest",
+		"winston": "0.7.x",
 
-		"pegjs": "git+https://github.com/dmajda/pegjs",
-		"escape-html": "*",
-		"performance-now": "*",
+		"pegjs": "0.8.x",
+		"escape-html": "1.0.x",
 		"ariatemplates": "*"
 	}
 }
