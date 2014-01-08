@@ -198,7 +198,7 @@ describe('Parsers', function(){
 			}, {
 				name: "bracedParamError",
 				rule: "bracedParam",
-				duration: 3,
+				duration: 6,
 				multiple: true,
 				failure: true
 			}, {
