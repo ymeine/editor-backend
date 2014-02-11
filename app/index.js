@@ -1,15 +1,21 @@
+// Sets the current working directory to the root of the application -----------
+
 var path = require('path');
 
 process.chdir(path.normalize(__dirname + '/..'));
 
 
 
-var server, logger, routes, options;
+// Default mode: starts a HTTP server as interface to internal API -------------
 
-server = require('http-server');
+var httpServer = require('http-server');
 
-logger = require('./logger');
-routes = require('./routes');
-options = require('./options');
+var logger = require('./logger');
+var routes = require('./routes');
+var options = require('./options');
 
-server.run(routes, options, logger);
+var server = httpServer.run(routes, options, logger);
+
+server.on('start', function(server, port) {
+	// TODO Ready to send the port
+});
