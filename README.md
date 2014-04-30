@@ -102,6 +102,8 @@ To be able to develop the project or even use the product you need to:
 	* the `node` binary must in in the `PATH` environment variable
 * Install [npm](https://npmjs.org/) ([releases](http://nodejs.org/dist/npm/))
 
+Here is a link that explains [manual installation](https://github.com/joyent/node/wiki/Installation#wiki-manual-install).
+
 Tested on Microsoft Windows 7 Enterprise 64-bit SP1.
 
 ## Setup
