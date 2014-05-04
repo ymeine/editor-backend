@@ -5,7 +5,7 @@ var path = require('path');
 var scriptPath = path.join(__dirname, '..', '..', 'app', 'index');
 console.log(scriptPath);
 
-var child = child_process.spawn('node-exe', [scriptPath, '--slave']);
+var child = child_process.spawn('node', [scriptPath, '--slave']);
 console.log('Child PID: ' + child.pid);
 
 // child.stderr.pipe(process.stderr);
