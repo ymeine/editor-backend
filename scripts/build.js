@@ -10,6 +10,7 @@ function exec() {
 	grammarBuilder.build('html');
 	grammarBuilder.build('at');
 	grammarBuilder.build('at-html');
+	grammarBuilder.build('js');
 }
 
 

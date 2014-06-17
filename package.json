@@ -67,7 +67,7 @@
 		"mocha": "*",
 		"benchmark": "*",
 		"colour": "*",
-		"tester": "git+https://github.com/ymeine/tester#version/latest"
+		"tester": "git+https://github.com/ymeine/tester"
 	},
 	"dependencies": {
 		"lodash": "2.x",
