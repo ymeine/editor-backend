@@ -1,4 +1,5 @@
 /node_modules/
-/log.log
+/__output__/
+npm-debug.log
 .project
 .settings

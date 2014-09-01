@@ -1,38 +1,63 @@
-Root of the client-side application using the backend.
+Web application for demonstration and testing of the backend.
 
-This can gather different things, either for _administration_, or even for development.
+
+
+
 
 # File system layout
 
-* [`README.md`](./README.md): this current file
-* [`index.html`](./index.html): the entry point of the application
-* `lib`: folder for manually installed 3rd party libraries
-* `bower_components`: folder for 3rd party libraries installed through [Bower](http://bower.io/)
+- [`readme.md`](./readme.md): the main documentation file
+- [`src/`](./src/): source code of the application
+
+Third-party components: 
+
+- `lib/`: manually installed
+- `bower_components/`: installed through [Bower](http://bower.io/)
+
+
+
+
 
 # Versioning
 
 To ignore:
 
-* `lib`: 3rd party libraries
-* `bower_components`: 3rd party libraries
+- 3rd party libraries: 
+	- `lib/`
+	- `bower_components/`
 
-To version: _everything else_.
 
-# Documentation
+
+
+
+# Resources
 
 ## 3rd party libraries
 
-I always use the latests releases expect specified otherwise.
+I always use the latest releases except specified otherwise.
 
-* [Require.js](http://requirejs.org/): modules management
-* [JQuery](http://jquery.com/): basic operations
-* [Bootstrap 3](http://getbootstrap.com/): GUI
-* [Hogan.js](http://twitter.github.io/hogan.js/): templating (GUI)
-* [Ace](http://ace.c9.io/#nav=about): code edition
-* [CodeMirror](http://codemirror.net/): code edition
-* [Highlight.js](http://softwaremaniacs.org/soft/highlight/en/): static code highlighting
-* [JavaScript InfoVis Toolkit](http://philogb.github.io/jit/): graph display
-* [Cytoscape.js](http://cytoscape.github.io/cytoscape.js/): graph display
+- modules management
+	- [Require.js](http://requirejs.org/)
+- standard/basic library
+	- [JQuery](http://jquery.com/)
+- GUI
+	- [Bootstrap 3](http://getbootstrap.com/)
+	- [Hogan.js](http://twitter.github.io/hogan.js/): templating
+- code edition
+	- [Ace](http://ace.c9.io/#nav=about)
+	- [CodeMirror](http://codemirror.net/)
+- introspection
+	- code highlighting
+		- [Highlight.js](http://softwaremaniacs.org/soft/highlight/en/)
+	- tree display
+		- [jqTree](http://mbraak.github.io/jqTree/)
+	- graph display
+		- [JavaScript InfoVis Toolkit](http://philogb.github.io/jit/)
+		- [Cytoscape.js](http://cytoscape.github.io/cytoscape.js/)
+
+
+
+
 
 # Contribute
 
@@ -52,22 +77,28 @@ bower install
 
 Just go to the root of the backend project and follow the [instructions to launch the backend](/#try).
 
-The application is served on two [routes](/app/routes.js):
+The application is served on two [routes](/src/routes.js):
 
-* `/` (no path)
-* `/app`
+- `/` (no path)
+- `/app`
 
-Open a browser and connect to localhost, on the port specified in the backend options (default to 3000): http://localhost:3000
+Open a browser and connect to `localhost`, on the port specified in the backend options (default to 3000): http://localhost:3000
 
-## FIXME
 
-* static locations specified in the options of the server are served considering the current working directory, which is a too weak convention (might change easily): change the use of the server library by specifying explicitely a root, resolved from a deterministic property (like the path of the module file)
+
+
+
+# Backlog
+
+## Issues
+
+- static locations specified in the options of the server are served considering the current working directory, which is a too weak convention (might change easily): change the use of the server library by specifying explicitly a root, resolved from a deterministic property (like the path of the module file)
 
 ## Documentation
 
-* Write documentration
+- Write documentration
 
-## Backlog
+## Code
 
 ### JIT
 
@@ -77,9 +108,9 @@ __Implement a graph display using JavaScript InfoVis Toolkit.__
 
 __Improve the use of the Cytoscape library.__
 
-* Adapt width of nodes to its content
-* Add scrolling features, more convenient than moving (by selecting all or pressing an edge) and playing with zoom
-* See how to choose the children orientation with the current layout (from left to right instead of right to left - for now the order is reversed on server-side to fix that)
+- Adapt width of nodes to its content
+- Add scrolling features, more convenient than moving (by selecting all or pressing an edge) and playing with zoom
+- See how to choose the children orientation with the current layout (from left to right instead of right to left - for now the order is reversed on server-side to fix that)
 
 ### Bootstrap
 
@@ -87,4 +118,4 @@ Maybe find an alternative.
 
 What is missing now:
 
-* easy layout management
+- easy layout management

@@ -1,0 +1,16 @@
+[
+	"slash",
+	"closingAngleBracket",
+	"eols",
+	"tabs",
+	"spaces",
+	{
+		"name": "id",
+		"rule": "id",
+		"multiple": true
+	},
+	"comment",
+	"simpleQuoteString",
+	"doubleQuoteString",
+	"attributeList"
+]

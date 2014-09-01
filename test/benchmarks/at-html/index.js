@@ -10,7 +10,7 @@ function readSource(name) {
 
 
 exports.parsers = [
-	{name: 'normal', parser: require('../../../app/node_modules/modes/at-html/parser').parser}
+	{name: 'normal', parser: require('../../../src/node_modules/modes/at-html/parser').parser}
 ];
 
 exports.inputs = [

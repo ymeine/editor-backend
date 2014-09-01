@@ -38,23 +38,23 @@
 
 	"scripts": {
 		"build": "node scripts/build",
-		"start": "node app/index",
+		"start": "node src/index",
 		"stop": "node scripts/shutdown",
 
 		"watch": "node scripts/watch",
-		"test": "mocha",
+		"test": "mocha test/tests/index.js",
 
 		"benchmark": "node scripts/benchmark"
 	},
 	"bin": {
-		"editor-backend": "bin/svc",
-		"editor-backend-build": "bin/build"
+		"editor-backend": "bin/svc/index",
+		"editor-backend-build": "bin/build/index"
 	},
 
 
 
 	"preferGlobal": true,
-	"private": false,
+	"private": true,
 
 
 	"engineStrict": false,
@@ -72,6 +72,7 @@
 	"dependencies": {
 		"lodash": "2.x",
 		"prelude-ls": "1.x",
+		"fs.extra": "1.2.x",
 
 		"oop": "git+https://github.com/ymeine/oop#version/latest",
 

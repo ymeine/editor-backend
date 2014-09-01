@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<title>Editor playground</title>
+
+<!-- 3rd parties - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+	<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css" media="screen" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<link rel="stylesheet" href="codemirror/theme/solarized.css" />
+	<link rel="stylesheet" href="codemirror/lib/codemirror.css" />
+
+	<!-- <link rel="stylesheet" href="highlightjs/styles/github.css" /> -->
+	<link rel="stylesheet" href="highlightjs/styles/solarized_light.css" />
+
+	<link rel="stylesheet" href="jqtree/jqtree.css" />
+
+
+<!-- Application - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+	<link rel="stylesheet" type="text/css" media="screen" href="./index.css" />
+
+	<style id="highlight-stylesheet"></style>
+</head>
+
+<body>
+	<div id="app-section" class="container">
+		<div id="messages-section"></div>
+		<div id="jumbotron-section"></div>
+		<div id="page-header-section"></div>
+<!-- App - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+		<div class="row btn-toolbar">
+			<div id="sidebar-section" class="col-lg-12 btn-group-vertical btn-group-justified"></div>
+		</div>
+
+		<div class="row">
+			<div id="tabs-section" class="col-lg-8">
+				<ul class="container col-lg-4 nav nav-pills nav-stacked"></ul>
+				<div class="container col-lg-8 tab-content"></div>
+			</div>
+
+			<div id="preview-section" class="col-lg-4">
+				<h1><!-- <span class="label label-default"> -->Live preview<!-- </span> --></h1>
+				<div id="preview-content">Here is the highlighting preview content</div>
+			</div>
+		</div>
+	</div>
+
+<!-- Editors - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+	<div id="tab-content-editor-ace"><div id="editor-ace"></div></div>
+	<div id="tab-content-editor-cm"><div id="editor-cm"></div></div>
+
+<!-- Views - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+	<div id="tab-content-highlighted"><div id="highlight-content"></div></div>
+	<div id="tab-content-graph">
+		<div class="row" style="height: 500px;">
+			<div id="graph-display" class="col-lg-12" style="height: 100%;"></div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-12">Nodes: <span id="total-nodes" class="badge badge-info" data-toggle="tooltip" title="Total number of nodes the graph contains" data-placement="top">10</span></div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-12">Leaves: <span id="total-leaves" class="badge badge-info" data-toggle="tooltip" title="Total number of leaf nodes the graph contains" data-placement="top">5</span></div>
+		</div>
+
+		<div id="breadcrumb-section" class="row"></div>
+	</div>
+
+<!-- Tree views - - - - - - - - - - - - - - - - - - - - - -  -->
+
+	<div id="tab-content-outline"><div id="outline-content"></div></div>
+	<div id="tab-content-ast"><div id="ast-content"></div></div>
+
+<!-- Code views - - - - - - - - - - - - - - - - - - - - - -  -->
+
+	<div id="tab-content-highlighting-data"><pre><code id="highlighting-data-content"></code></pre></div>
+	<div id="tab-content-folding-data"><pre><code id="folding-data-content"></code></pre></div>
+	<div id="tab-content-ast-data"><pre><code id="ast-data-content"></code></pre></div>
+	<div id="tab-content-outline-data"><pre><code id="outline-data-content"></code></pre></div>
+
+<!-- Dialogs - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+	<div id="dialogs-section"></div>
+
+	<div id="dialog-content-help">
+		<h1>How to use this?</h1>
+		<p>Just write code in the editor, that you can access through the navigation pane in the left sidebar, and then parse it using the parse button in the same sidebar.</p>
+		<p>The resulting graph will be displayed, accessible through the navigation pane too.</p>
+	</div>
+
+<!-- Scripts - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+	<script src="requirejs/require.js"></script>
+	<script src="jquery/dist/jquery.js"></script>
+
+
+
+	<script src="bootstrap/dist/js/bootstrap.js"></script>
+	<script src="hogan/web/builds/2.0.0/hogan-2.0.0.js"></script>
+
+
+
+	<script src="jqtree/tree.jquery.js"></script>
+	<script src="highlightjs/highlight.pack.js"></script>
+
+	<script src="jit/Jit/jit.js"></script>
+	<script src="cytoscape/dist/cytoscape.js"></script>
+
+	<script type="text/javascript">
+		// ------------------------------------------------- Modules definitions
+
+		var modules = {
+			"backend": {},
+			"adapters": {
+				"gui": {
+					"editors": {
+						"ace": {},
+						"codemirror": {}
+					},
+					"graphs": {
+						"jit": {},
+						"cytoscape": {}
+					}
+				}
+			},
+			"gui": {
+				"actions": {},
+				"widgets": {
+					"tabsgroup": {},
+					"templates": {}
+				}
+			}
+		};
+
+		// --------------------------------------------- RequireJS configuration
+
+		var packages = [];
+		function build_module_path(modules, basepath) {
+			for (var module in modules) {
+				modulepath = basepath + module;
+				packages.push({name: modulepath, main: "index"});
+
+				var submodules = modules[module];
+				build_module_path(submodules, modulepath + '/')
+			}
+		}
+		build_module_path(modules, '');
+		console.log(packages);
+
+		require.config({
+			paths: {
+				// Ace uses requirejs too, so to avoid CONFLICTS it has to be configured properly, and to be loaded through require
+				"ace": "ace/lib/ace"
+			},
+
+			packages: packages
+		});
+
+		require(['index']);
+	</script>
+
+</body>
+
+</html>
