@@ -11,7 +11,7 @@ function readSource(name) {
 var name = 'HTML';
 
 var parsers = [
-	{name: 'normal', parser: require('../../../app/node_modules/modes/html/parser').parser}
+	{name: 'normal', parser: require('../../../src/node_modules/modes/html/parser').parser}
 ];
 
 var inputs = [

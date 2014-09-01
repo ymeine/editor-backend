@@ -1,20 +1,34 @@
 {
 	"name": "editor-webapp",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"private": true,
 
-	"main": "index.html",
+	"main": "src/index.html",
 
 	"dependencies": {
-		"requirejs": "*",
-		"jquery": "*",
-		"jqtree": "*",
-		"bootstrap": "*",
-		"hogan": "*",
-		"ace": "*",
-		"codemirror": "*",
-		"highlightjs": "*",
-		"jit": "*",
-		"cytoscape": "*"
+		"requirejs": "2.1.x",
+
+
+
+		"jquery": "2.1.x",
+
+
+
+		"bootstrap": "3.2.x",
+		"hogan": "3.0.x",
+
+
+
+		"ace": "1.1.x",
+		"codemirror": "4.5.x",
+
+
+
+		"highlightjs": "8.0.x",
+
+		"jqtree": "0.21.x",
+
+		"jit": "2.0.x",
+		"cytoscape": "2.2.x"
 	}
 }
