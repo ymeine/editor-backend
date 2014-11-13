@@ -99,7 +99,7 @@
 <!-- Scripts - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
 	<script src="requirejs/require.js"></script>
-	<script src="jquery/jquery.js"></script>
+	<script src="jquery/dist/jquery.js"></script>
 
 
 
@@ -108,23 +108,18 @@
 
 
 
-	<script src="codemirror/lib/codemirror.js"></script>
-	<script src="codemirror/mode/xml/xml.js"></script>
-	<script src="codemirror/mode/javascript/javascript.js"></script>
-	<script src="codemirror/mode/css/css.js"></script>
-	<script src="codemirror/mode/htmlmixed/htmlmixed.js"></script>
-
 	<script src="jqtree/tree.jquery.js"></script>
 	<script src="highlightjs/highlight.pack.js"></script>
 
 	<script src="jit/Jit/jit.js"></script>
-	<script src="cytoscape/cytoscape.js"></script>
+	<script src="cytoscape/dist/cytoscape.js"></script>
 
 	<script type="text/javascript">
 		// Ace uses requirejs too, so to avoid CONFLICTS it has to be configured properly, and to be loaded through require
 		require.config({
 			paths: {
 				"ace": "ace/lib/ace"
+				// "codemirror": "codemirror"
 			}
 		});
 

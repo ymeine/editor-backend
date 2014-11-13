@@ -17,11 +17,11 @@ TabsGroup = TabsGroup.TabsGroup;
 
 // Top of the page -------------------------------------------------------------
 
-GUI.jumbotron({
-	header: 'Ultimate editor!',
-	content: 'Try the features of the ultimate editor, which funnily doesn\'t have a frontend...'
-});
-GUI.pageHeader({text: 'Graph visualization', small: 'Parse and play'});
+// GUI.jumbotron({
+// 	header: 'Ultimate editor!',
+// 	content: 'Try the features of the ultimate editor, which funnily doesn\'t have a frontend...'
+// });
+// GUI.pageHeader({text: 'Graph visualization', small: 'Parse and play'});
 
 // Actions ---------------------------------------------------------------------
 
@@ -32,8 +32,8 @@ GUI.addAction({label: 'Init', type: 'danger', onclick: 'poc.init()', icon: 'home
 // GUI.addAction({label: 'Update all', type: 'primary', loading: 'Updating...', onclick: 'poc.update()', icon: 'refresh'});
 GUI.addAction({label: 'Clear', type: 'danger', onclick: 'poc.clear()', icon: 'trash'});
 GUI.addAction({label: 'Help', type: 'info', href: 'help', icon: 'question-sign'});
-GUI.addAction({label: 'Ping', onclick: 'poc.ping()'});
-GUI.addAction({label: 'Identify', onclick: 'poc.guid()'});
+GUI.addAction({label: 'Ping', onclick: 'poc.ping()', icon: 'check'});
+GUI.addAction({label: 'Identify', onclick: 'poc.guid()', icon: 'transfer'});
 GUI.addAction({label: 'Shutdown', type: 'danger', onclick: 'poc.shutdown()', icon: 'off'});
 
 // Tabs ------------------------------------------------------------------------

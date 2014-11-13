@@ -10,7 +10,6 @@ define([
 
 
 
-
 function objectToJqTree(obj, key) {
 	var label = key;
 
@@ -174,10 +173,10 @@ var poc = {
 		this.source = this.editor.getSession().getDocument().getValue();
 		Backend.updateAll(poc.doc, this.source);
 
-		//this.parse();
+		this.parse();
 		this.highlight();
-		// this.fold();
-		//this.outline();
+		this.fold();
+		this.outline();
 		this.validate();
 		this.refreshPreview();
 	},
@@ -367,6 +366,9 @@ var poc = {
 };
 
 window.poc = poc;
+poc.$libs = {
+	Backend: Backend
+};
 return poc;
 
 });

@@ -1,7 +1,16 @@
 define([
-	'ace/ace'
+	'ace/ace',
+
+	'codemirror/lib/codemirror',
+
+	'codemirror/mode/xml/xml',
+	'codemirror/mode/javascript/javascript',
+	'codemirror/mode/css/css',
+	'codemirror/mode/htmlmixed/htmlmixed'
 ], function(
-	ace
+	ace,
+
+	CodeMirror
 ) {
 
 function createAceEditor(id, height) {
